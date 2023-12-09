@@ -4,17 +4,23 @@ const canLeftBecomeRight = (Left, Right) => {
     let j = Right.length - 1
     let dropL = 0
     let dropR = 0
-    while(i > 0 && j > 0){
-        if(Left[i] === Right[j]){
+    while (i >= 0 && j >= 0) {
+        console.log(Left[i], Right[j])
+        if (Left[i] === Right[j]) {
             i--
             j--
-        } else if(Left[i] > Right[j]){
-            if(dropL) return false
+        } else if (Left[i] > Right[j]) {
+            if (dropL) return false
             dropL = Left[i--]
         } else {
-            if(dropR) return false
+            if (dropR) return false
             dropR = Right[j--]
         }
     }
-    return [dropL, dropR]
+    return dropL > dropR
 }
+
+const Left = [1, 4, 8]
+const Right = [1, 4, 6]
+const result = canLeftBecomeRight(Left, Right)
+console.log(result)
