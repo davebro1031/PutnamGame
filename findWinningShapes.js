@@ -20,7 +20,7 @@ const canLeftBecomeRight = (Left, Right) => {
     return dropL > dropR
 }
 
-const Left = [1, 4, 8]
-const Right = [1, 4, 6]
+const Left = [3, 4, 8, 9]
+const Right = [2, 4, 8, 9]
 const result = canLeftBecomeRight(Left, Right)
 console.log(result)
