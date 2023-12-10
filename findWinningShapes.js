@@ -18,7 +18,6 @@ const leftCanBecomeRight = (Left, Right) => {
     }
     return dropL > dropR
 }
-
 const canReachWinningShape = (board, shapes) => {
     for (let i = 0; i < shapes.length; i++) {
         if (leftCanBecomeRight(board, shapes[i])) return true
@@ -55,8 +54,17 @@ const findWinningShapes = (n, end) => {
     }
     return shapes.filter(shape => shape[0] > 1)
 }
+const shapeConverter = (shape) => {
+    let result = []
+    for(let i = shape.length - 1; i > 0; i--){
+        result[shape.length - 1 - i] = shape[i] - shape[i-1] - 1
+    }
+    result[shape.length - 1] = shape[0] - 1
+    return result
+}
 
-const n = 3, end = 20
+const n = 3, end = 30, filter = 10
 const result = findWinningShapes(n, end)
-console.log(result)
-console.log(result.map( arr => arr.reduce((acc, curr) => acc + curr, 0)) )
+console.log(result.filter(a => a[2] === filter).map(shapeConverter))
+console.log(result.filter(a => a[2] === filter).map(shapeConverter).map( arr => arr.reduce((acc, curr) => acc + curr, 0)))
+// console.log(result.map( arr => arr.reduce((acc, curr) => acc + curr, 0)) )
