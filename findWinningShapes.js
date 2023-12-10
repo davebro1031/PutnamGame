@@ -28,7 +28,7 @@ const canReachWinningShape = (board, shapes) => {
 const findWinningShapes = (n, end) => {
     let currBoard = []
     for (let i = 0; i < n; i++) currBoard[i] = i + 1
-    let shapes = [currBoard]
+    let shapes = [currBoard.slice()]
     let boardSize = n + 1
     currBoard[n - 1] = boardSize
     while (boardSize <= end) {
@@ -36,8 +36,7 @@ const findWinningShapes = (n, end) => {
         // if it fails ALL of them, add currBoard to shapes
 
         while (currBoard[0] < boardSize - n + 1) {
-            if (!leftCanBecomeRight(currBoard, shapes)) shapes.push(currBoard)
-
+            if (!canReachWinningShape(currBoard, shapes)) shapes.push(currBoard.slice())
             // try to increment to next board
             // if we're at the last board, increment boardsize and restart the loop
             for (let i = n - 2; i >= 0; i--) {
@@ -48,15 +47,16 @@ const findWinningShapes = (n, end) => {
                 }
             }
         }
-
+        if (!canReachWinningShape(currBoard, shapes)) shapes.push(currBoard.slice())
 
         boardSize++
         for (let i = 0; i < n - 1; i++) currBoard[i] = i + 1
         currBoard[n - 1] = boardSize
     }
-    return shapes
+    return shapes.filter(shape => shape[0] > 1)
 }
 
-const n = 3, end = 7
+const n = 3, end = 20
 const result = findWinningShapes(n, end)
 console.log(result)
+console.log(result.map( arr => arr.reduce((acc, curr) => acc + curr, 0)) )
