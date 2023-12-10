@@ -5,7 +5,6 @@ const leftCanBecomeRight = (Left, Right) => {
     let dropL = 0
     let dropR = 0
     while (i >= 0 && j >= 0) {
-        console.log(Left[i], Right[j])
         if (Left[i] === Right[j]) {
             i--
             j--
@@ -21,22 +20,18 @@ const leftCanBecomeRight = (Left, Right) => {
 }
 
 const canReachWinningShape = (board, shapes) => {
-    for(let i = 0; i < shapes.length; i++){
-        if(leftCanBecomeRight(board, shapes[i])) return true
+    for (let i = 0; i < shapes.length; i++) {
+        if (leftCanBecomeRight(board, shapes[i])) return true
     }
     return false
 }
-
-
-
-
 const findWinningShapes = (n, end) => {
     let currBoard = []
     for (let i = 0; i < n; i++) currBoard[i] = i + 1
     let shapes = [currBoard]
     let boardSize = n + 1
-    currBoard[n-1] = boardSize
-    while(boardSize <= end){
+    currBoard[n - 1] = boardSize
+    while (boardSize <= end) {
         // for each of the members in shapes, check if currboard can reach it.
         // if it fails ALL of them, add currBoard to shapes
 
@@ -46,8 +41,8 @@ const findWinningShapes = (n, end) => {
 
 
         boardSize++
-        for(let i = 0; i < n - 1; i++) currBoard[i] = i + 1
-        currBoard[n-1] = boardSize
+        for (let i = 0; i < n - 1; i++) currBoard[i] = i + 1
+        currBoard[n - 1] = boardSize
     }
     return shapes
 }
