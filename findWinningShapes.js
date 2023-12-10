@@ -56,15 +56,33 @@ const findWinningShapes = (n, end) => {
 }
 const shapeConverter = (shape) => {
     let result = []
-    for(let i = shape.length - 1; i > 0; i--){
-        result[shape.length - 1 - i] = shape[i] - shape[i-1] - 1
+    for (let i = shape.length - 1; i > 0; i--) {
+        result[shape.length - 1 - i] = shape[i] - shape[i - 1] - 1
     }
     result[shape.length - 1] = shape[0] - 1
     return result
 }
+const findSum = (arr) => {
+    return arr.reduce((acc, curr) => acc + curr, 0)
+}
 
-const n = 3, end = 30, filter = 10
-const result = findWinningShapes(n, end)
-console.log(result.filter(a => a[2] === filter).map(shapeConverter))
-console.log(result.filter(a => a[2] === filter).map(shapeConverter).map( arr => arr.reduce((acc, curr) => acc + curr, 0)))
+const foldShape = (shape) => {
+    let n = shape[shape.length - 1]
+    let result = []
+    for (let i = 0; i < shape.length; i++) {
+        result[i] = (shape[i] > n / 2 ? n - shape[i] + 1 : shape[i])
+    }
+    return result.sort((a, b) => a - b)
+}
+
+const shape = [2, 12, 14]
+console.log(foldShape(shape))
+
+// const n = 3, end = 15, filter = 14
+// const result = findWinningShapes(n, end)
+// console.log(result.filter(a => a[2] === filter))
+
+// console.log(result.filter(a => a[2] === filter).map(shapeConverter).map(findSum))
+// console.log(result.filter(a => a[2] === filter).map(shapeConverter))
+// console.log(result.filter(a => a[2] === filter).map(shapeConverter).map( arr => arr.reduce((acc, curr) => acc + curr, 0)))
 // console.log(result.map( arr => arr.reduce((acc, curr) => acc + curr, 0)) )
