@@ -75,12 +75,18 @@ const foldShape = (shape) => {
     return result.sort((a, b) => a - b)
 }
 
-const shape = [2, 12, 14]
-console.log(foldShape(shape))
+const shapeHistogram = (shapes, n, end) => {
+    let result = {}
+    for(let i = n; i <= end ; i++ ){
+        result[i]
+    }
+}
 
-// const n = 3, end = 15, filter = 14
-// const result = findWinningShapes(n, end)
-// console.log(result.filter(a => a[2] === filter))
+const n = 3, end = 40, filter = 3
+const result = findWinningShapes(n, end)
+// console.log(result)
+console.log(result.filter(a => a[0] === filter).map(shapeConverter))
+// console.log(result.filter(a => a[1] === filter).map(foldShape))
 
 // console.log(result.filter(a => a[2] === filter).map(shapeConverter).map(findSum))
 // console.log(result.filter(a => a[2] === filter).map(shapeConverter))
