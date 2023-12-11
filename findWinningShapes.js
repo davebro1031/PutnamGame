@@ -52,7 +52,7 @@ const findWinningShapes = (n, end) => {
         for (let i = 0; i < n - 1; i++) currBoard[i] = i + 1
         currBoard[n - 1] = boardSize
     }
-    return shapes.filter(shape => shape[0] > 1)
+    return shapes //.filter(shape => shape[0] > 1)
 }
 const shapeConverter = (shape) => {
     let result = []
@@ -75,18 +75,26 @@ const foldShape = (shape) => {
     return result.sort((a, b) => a - b)
 }
 
-const shapeHistogram = (shapes, n, end) => {
+const shapeHistogram = (shapes, position) => {
     let result = {}
-    for(let i = n; i <= end ; i++ ){
-        result[i]
+    let max = 0
+    for(let i = 0; i < shapes.length ; i++ ){
+        max = Math.max(max, shapes[i][position])
+        result[shapes[i][position]] = (result[shapes[i][position]] ? result[shapes[i][position]] + 1 : 1)
     }
+    for(let i = 3; i<max; i++){
+        if(!result[i]) result[i] = 0
+    }
+    return result
 }
 
-const n = 3, end = 40, filter = 3
+const n = 3, end = 15, filter = end
 const result = findWinningShapes(n, end)
-// console.log(result)
-console.log(result.filter(a => a[0] === filter).map(shapeConverter))
-// console.log(result.filter(a => a[1] === filter).map(foldShape))
+console.log(result)
+// console.log(result.map(shapeConverter))
+// console.log(result.filter(a => a[2] === filter))
+// console.log(result.filter(a => a[2] === filter).map(shapeConverter))
+// console.log(shapeHistogram(result, 2))
 
 // console.log(result.filter(a => a[2] === filter).map(shapeConverter).map(findSum))
 // console.log(result.filter(a => a[2] === filter).map(shapeConverter))
